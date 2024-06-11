@@ -1,0 +1,7 @@
+---
+# roles/common/tasks/download/download_siren.yml
+
+- name: Download Siren Platform
+  ansible.builtin.get_url:
+    url: "{{ siren_download_url }}"
+    dest: "/tmp/{{ siren_zip_name }}"

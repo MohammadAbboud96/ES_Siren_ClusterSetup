@@ -1,0 +1,11 @@
+  GNU nano 8.0                                             set_permissions.yml
+---
+# roles/common/tasks/permissions/set_permissions.yml
+
+- name: Ensure users have write permissions on /opt
+  ansible.builtin.file:
+    path: /opt
+    state: directory
+    mode: '1777'
+  become: yes
+  become_user: root

@@ -1,0 +1,13 @@
+- name: Configure Siren Investigate
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^#?server\.host:'
+    line: 'server.host: {{ ansible_host }}'
+  become: yes
+
+- name: Configure Siren Investigate Elasticsearch URL
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^#?elasticsearch\.url:'
+    line: 'elasticsearch.url: "http://{{ ansible_host }}:9220"'
+  become: yes

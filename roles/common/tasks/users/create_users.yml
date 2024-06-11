@@ -1,0 +1,14 @@
+---
+# roles/common/tasks/users/create_users.yml
+
+- name: Add elastic user
+  ansible.builtin.user:
+    name: elastic
+    state: present
+    shell: /bin/bash
+
+- name: Add siren user
+  ansible.builtin.user:
+    name: siren
+    state: present
+    shell: /bin/bash

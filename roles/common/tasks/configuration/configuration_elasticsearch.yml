@@ -1,0 +1,66 @@
+---
+# roles/common/tasks/configuration/configure_elasticsearch.yml
+
+- name: Commenting discovery type
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^discovery\.type\: single-node$'
+    line: '#discovery.type: single-node'
+  become: yes
+
+- name: Change cluster name
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^cluster\.name:'
+    line: 'cluster.name: {{ cluster_name }}'
+  become: yes
+
+- name: Set network.host to machine IP address
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^#?network\.host:'
+    line: 'network.host: {{ ansible_host }}'
+  become: yes
+
+- name: Set cluster.initial_master_nodes
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^#?cluster\.initial_master_nodes:'
+    line: 'cluster.initial_master_nodes: ["{{ master_nodes }}"]'
+  become: yes
+
+- name: Set discovery.seed_hosts
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^#?discovery\.seed_hosts:'
+    line: 'discovery.seed_hosts: [{{ seed_hosts }}]'
+  become: yes
+
+- name: Set hostname
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^node\.name:'
+    line: 'node.name: {{ hostname }}'
+  become: yes
+
+- name: Add node configurations based on the role
+  ansible.builtin.blockinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK -- {{ node_role }} NODE"
+    block: |
+      {% if node_role == "MASTER" %}
+      node.master: true
+      node.data: false
+      node.ingest: false
+      {% elif node_role == "DATA" %}
+      node.master: false
+      node.data: true
+      node.ingest: true
+      {% endif %}
+  become: yes
+
+- name: Clear ES data folder
+  ansible.builtin.shell:
+    cmd: rm -r /opt/elasticsearch/data/*
+  become_user: elastic
+  become: yes

@@ -1,0 +1,35 @@
+---
+# roles/common/tasks/main.yml
+
+- name: Set hostname
+  include_tasks: roles/common/tasks/hostname/set_hostnames.yml
+
+- name: User management
+  include_tasks: roles/common/tasks/users/create_users.yml
+
+- name: Set user passwords
+  include_tasks: roles/common/tasks/users/set_passwords.yml
+
+- name: Grant sudo privileges
+  include_tasks: roles/common/tasks/users/grant_sudo.yml
+
+- name: Install necessary packages
+  include_tasks: roles/common/tasks/packages/install_packages.yml
+
+- name: Set permissions
+  include_tasks: roles/common/tasks/permissions/set_permissions.yml.yml
+
+- name: Download and extract Siren Platform
+  include_tasks: roles/common/tasks/download/download_siren.yml
+
+- name: Extract Siren
+  include_tasks: roles/common/tasks/download/extract_siren.yml
+
+- name: Organize Siren
+  include_tasks: roles/common/tasks/download/organize_siren.yml
+
+- name: Configure Elasticsearch
+  include_tasks: roles/common/tasks/configuration/configure_elasticsearch.yml
+
+- name: Configure Siren Investigate
+  include_tasks: roles/common/tasks/configuration/configure_siren.yml

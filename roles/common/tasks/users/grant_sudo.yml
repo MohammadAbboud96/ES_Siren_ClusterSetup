@@ -1,0 +1,32 @@
+---
+# roles/common/tasks/users/grant_sudo.yml
+
+- name: Allow 'elastic' user to run sudo without a password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^elastic ALL=\(ALL\) NOPASSWD: ALL'
+    line: 'elastic ALL=(ALL) NOPASSWD: ALL'
+  become: yes
+  become_user: root
+
+- name: Allow 'siren' user to run sudo without a password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^siren ALL=\(ALL\) NOPASSWD: ALL'
+    line: 'siren ALL=(ALL) NOPASSWD: ALL'
+  become: yes
+  become_user: root
+
+- name: Grant sudo privileges to elastic user
+  ansible.builtin.user:
+    name: elastic
+    groups: sudo
+    append: yes
+
+- name: Grant sudo privileges to siren user
+  ansible.builtin.user:
+    name: siren
+    groups: sudo
+    append: yes

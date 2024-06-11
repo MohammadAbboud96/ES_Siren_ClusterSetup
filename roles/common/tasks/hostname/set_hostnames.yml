@@ -1,0 +1,22 @@
+---
+# roles/common/tasks/hostname/set_hostname.yml
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  become: yes
+
+- name: Ensure /etc/hostname contains the correct hostname
+  ansible.builtin.lineinfile:
+    path: /etc/hostname
+    line: "{{ hostname }}"
+    create: yes
+  become: yes
+
+- name: Ensure /etc/hosts is updated with the new hostname
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s+.*$'
+    line: "127.0.1.1 {{ hostname }}"
+    create: yes
+  become: yes

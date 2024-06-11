@@ -1,0 +1,51 @@
+---
+# roles/common/tasks/download/organize_siren.yml
+
+- name: Rename extracted folder to siren-platform
+  ansible.builtin.shell:
+    cmd: mv /tmp/siren-platform-* /tmp/{{ siren_folder_name }}
+  args:
+    creates: "/tmp/{{ siren_folder_name }}"
+
+- name: Copy elasticsearch folder to elastic user
+  ansible.builtin.copy:
+    src: "/tmp/{{ siren_folder_name }}/elasticsearch"
+    dest: "/home/elastic/elasticsearch"
+    owner: elastic
+    group: elastic
+    mode: '0755'
+    remote_src: yes
+
+- name: Copy siren-investigate folder to siren user
+  ansible.builtin.copy:
+    src: "/tmp/{{ siren_folder_name }}/siren-investigate"
+    dest: "/home/siren/"
+    owner: siren
+    group: siren
+    mode: '0755'
+    remote_src: yes
+
+- name: Ensure /opt/elasticsearch does not exist
+  ansible.builtin.file:
+    path: /opt/elasticsearch
+    state: absent
+  become: yes
+
+- name: Create elasticsearch folder inside /opt
+  ansible.builtin.shell:
+    cmd: mkdir /opt/elasticsearch
+  become_user: elastic
+  become: yes
+
+- name: Move elasticsearch folder content to /opt/elasticsearch
+  ansible.builtin.shell:
+    cmd: mv /home/elastic/elasticsearch/* /opt/elasticsearch
+  become_user: elastic
+  become: yes
+
+- name: Delete /home/elastic/elasticsearch folder
+  ansible.builtin.shell:
+    cmd: rmdir /home/elastic/elasticsearch
+  become_user: elastic
+  become: yes
+

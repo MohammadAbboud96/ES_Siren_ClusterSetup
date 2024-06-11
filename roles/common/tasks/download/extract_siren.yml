@@ -1,0 +1,8 @@
+---
+# roles/common/tasks/download/extract_siren.yml
+
+- name: Unzip Siren Platform
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ siren_zip_name }}"
+    dest: /tmp/
+    remote_src: yes

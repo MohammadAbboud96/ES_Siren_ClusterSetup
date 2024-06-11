@@ -1,0 +1,43 @@
+ca:
+  root:
+    dn: CN=root.siren.com,OU=Ops,O=siren-root Com,DC=siren-root,DC=com
+    file: root-ca.pem
+defaults:
+  validityDays: 3650
+  nodeOid: "1.2.3.4.5.5"
+  generatedPasswordLength: 12
+  httpsEnabled: true
+  pkPassword: password
+nodes:
+  - name: master-1
+    dn: CN=master-1
+    dns: master-1
+    ip: 192.168.XX.XX1
+  - name: master-2
+    dn: CN=master-2
+    dns: master-2
+    ip: 192.168.XX.XX2
+  - name: master-3
+    dn: CN=master-3
+    dns: master-3
+    ip: 192.168.XX.XX3
+  - name: data-1
+    dn: CN=data-1
+    dns: data-1
+    ip: 192.168.YY.YY1
+  - name: data-2
+    dn: CN=data-2
+    dns: data-2
+    ip: 192.168.YY.YY2
+  - name: data-3
+    dn: CN=data-3
+    dns: data-3
+    ip: 192.168.YY.YY3
+  #- name: siren-db02-dev.web-dev.xxx.com
+  #dn: CN=siren-db02-dev.web-dev.xxx.com,OU=Ops,O=xxx COM,DC=xxx,DC=com
+  #dns: siren-db02-dev.web-dev.xxx.com
+  #ip: 10.200.33.138
+clients:
+  - name: sgadmin
+    dn: CN=sgadmin
+    admin: true
