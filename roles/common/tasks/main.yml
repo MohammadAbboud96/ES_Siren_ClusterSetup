@@ -17,7 +17,7 @@
   include_tasks: roles/common/tasks/packages/install_packages.yml
 
 - name: Set permissions
-  include_tasks: roles/common/tasks/permissions/set_permissions.yml.yml
+  include_tasks: roles/common/tasks/permissions/set_permissions.yml
 
 - name: Download and extract Siren Platform
   include_tasks: roles/common/tasks/download/download_siren.yml
@@ -29,7 +29,7 @@
   include_tasks: roles/common/tasks/download/organize_siren.yml
 
 - name: Configure Elasticsearch
-  include_tasks: roles/common/tasks/configuration/configure_elasticsearch.yml
+  include_tasks: roles/common/tasks/configuration/configuration_elasticsearch.yml
 
 - name: Configure Siren Investigate
-  include_tasks: roles/common/tasks/configuration/configure_siren.yml
+  include_tasks: roles/common/tasks/configuration/configuration_siren.yml
