@@ -11,3 +11,58 @@
     regexp: '^#?elasticsearch\.url:'
     line: 'elasticsearch.url: "http://{{ ansible_host }}:9220"'
   become: yes
+
+- name: Configure Siren Investigate Elasticsearch URL
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^#?elasticsearch\.url:'
+    line: 'elasticsearch.url: "http://{{ ansible_host }}:9220"'
+  become: yes
+
+- name: Setting ES requestTimeout
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^#elasticsearch.requestTimeout: 30000'
+    line: "elasticsearch.requestTimeout: 30000"
+  become: yes
+
+- name: Add root-ca certificate
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^elasticsearch.ssl.certificateAuthorities:'
+    line: "elasticsearch.ssl.certificateAuthorities: ['config/root-ca.pem']"
+  become: yes
+
+- name: Setting ssl certificate
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^server.ssl.certificate:'
+    line: "server.ssl.certificate:{{ hostname }}.pem"
+  become: yes
+
+- name: Setting ssl key
+  ansible.builtin.lineinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    regexp: '^server.ssl.key:'
+    line: "server.ssl.key: {{ hostname }}.key"
+  become: yes
+
+
+- name: Add whiteLabel
+  ansible.builtin.blockinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    marker: "# Adjusting whiteLabel {Company name, logo directories}"
+    block: |
+      whiteLabel:
+        companyName: {{ CompanyName }}
+        productName: Investigate
+        imagesDir: 'assets/images/{{companyLogosDir}}'
+  become: yes
+
+- name: Enable Scripting
+  ansible.builtin.blockinfile:
+    path: /home/siren/siren-investigate/config/investigate.yml
+    block: |
+      siren_scripting:
+        enabled: true
+  become: yes

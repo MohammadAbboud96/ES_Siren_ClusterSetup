@@ -8,14 +8,14 @@
     - sudo apt install ansible
 
 - ### Setting up SSH key-based authentication
-    - Generate SSH Key     
-        ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    - Generate SSH Key
+      -     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
     
-    - Copy the Public Key to Host Machines
+      - Copy the Public Key to Host Machines
         
-      - ssh-copy-id your_username@server1
-      - ssh-copy-id your_username@server2
-      - ssh-copy-id your_username@server3
+        -      ssh-copy-id your_username@server1 
+        -      ssh-copy-id your_username@server2
+        -      ssh-copy-id your_username@server3
     
     - Verify SSH Key authentication:
         - ssh your_username@server1
@@ -26,7 +26,7 @@
   - Update the hosts file inside inventory directory with your correspnding IP addresses.
 
 - ### Running the Playbook
-  - ansible-playbook -i inventory/hosts.ini playbook.yml
+  -     ansible-playbook -i inventory/hosts.ini playbook.yml
   - Use -vvv  for verbose output to get more details about what Ansible is doing.
 
 ## Generating TLS Keys
@@ -58,7 +58,7 @@
 ## Notes:
 - Ensure that max_map_count is enough.
 - To set it to its proper value:
-  - sudo nano /etc/sysctl.conf
+  -     sudo nano /etc/sysctl.conf
   - Add [vm.max_map_count=262144]
-  - sudo sysctl -p
+  -     sudo sysctl -p
 

@@ -12,11 +12,14 @@
       run_once: true  # This task runs only once on the controller node
 
   vars:
-    siren_download_url: "https://download.siren.io/platform/download/?component=siren-platform-no-data-with-security&os=linux&versio>    siren_zip_name: "siren-platform.zip"
+    siren_download_url: "https://download.siren.io/platform/download/?component=siren-platform-no-data-with-security&os=linux&version=14.2.0"
+    siren_zip_name: "siren-platform.zip"
     siren_folder_name: "siren-platform"
     cluster_name: "ElasticSiren-Cluster-With-Security"
-    master_nodes: "master-1"  # Comma-separated list of master nodes
+    master_nodes: "master-1","master-2","master-3"  # Comma-separated list of master nodes
     seed_hosts: 192.168.XX.XXY, 192.168.XX.XYZ  # Comma-separated list of seed hosts
+    companyLogosDir: "LOGO_IMAGES_DIRECTORY"
+    CompanyName: "YOUR_COMPANY_NAME"
 
   roles:
     - common
