@@ -1,0 +1,110 @@
+---
+# roles/common/tasks/configuration/commenting_elasticsearch_configuration.yml
+
+- name: Commenting searchguard custom headers
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.allow_custom_headers: "_siren_.*"'
+    line: '#searchguard.allow_custom_headers: "_siren_.*"'
+  become: yes
+
+- name: Commenting searchguard SSL transport enabled
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.enabled: true'
+    line: '#searchguard.ssl.transport.enabled: true'
+  become: yes
+
+- name: Commenting searchguard SSL transport truststore
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.truststore_filepath: truststore.jks'
+    line: '#searchguard.ssl.transport.truststore_filepath: truststore.jks'
+  become: yes
+
+- name: Commenting searchguard SSL transport truststore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.truststore_password: password'
+    line: '#searchguard.ssl.transport.truststore_password: password'
+  become: yes
+
+- name: Commenting searchguard SSL transport keystore filepath
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.keystore_filepath: {{ hostname }}-keystore.jks'
+    line: '#searchguard.ssl.transport.keystore_filepath: {{ hostname }}-keystore.jks'
+  become: yes
+
+- name: Commenting searchguard SSL transport keystore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.keystore_password: password'
+    line: '#searchguard.ssl.transport.keystore_password: password'
+  become: yes
+
+- name: Commenting searchguard SSL transport enforce hostname verification
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.enforce_hostname_verification: false'
+    line: '#searchguard.ssl.transport.enforce_hostname_verification: false'
+  become: yes
+
+- name: Commenting searchguard SSL http enabled
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.enabled: true'
+    line: '#searchguard.ssl.http.enabled: true'
+  become: yes
+
+- name: Commenting searchguard SSL http keystore filepath
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.keystore_filepath: {{ hostname }}-keystore.jks'
+    line: '#searchguard.ssl.http.keystore_filepath: {{ hostname }}-keystore.jks'
+  become: yes
+
+
+- name: Commenting searchguard SSL http keystore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.keystore_password: password'
+    line: '#searchguard.ssl.http.keystore_password: password'
+  become: yes
+
+
+- name: Commenting searchguard SSL http truststore filepath
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.truststore_filepath: truststore.jks'
+    line: '#searchguard.ssl.http.truststore_filepath: truststore.jks'
+  become: yes
+
+- name: Commenting searchguard SSL http truststore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.truststore_password: password'
+    line: '#searchguard.ssl.http.truststore_password: password'
+  become: yes
+
+
+- name: Commenting searchguard restapi
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard\.restapi\.roles_enabled\: ["investigate_admin"]'
+    line: '#searchguard\.restapi\.roles_enabled\: ["investigate_admin"]'
+  become: yes
+
+- name: Commenting searchguard authcz
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.authcz.admin_dn:'
+    line: '#searchguard.authcz.admin_dn:'
+  become: yes
+
+- name: Commenting searchguard authcz
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^  - CN=sgadmin'
+    line: '#  - CN=sgadmin'
+  become: yes

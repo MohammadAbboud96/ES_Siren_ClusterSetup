@@ -33,7 +33,7 @@
   ansible.builtin.lineinfile:
     path: /opt/elasticsearch/config/elasticsearch.yml
     regexp: '^#?discovery\.seed_hosts:'
-    line: 'discovery.seed_hosts: [{{ seed_hosts }}]'
+    line: 'discovery.seed_hosts: {{ seed_hosts }}'
   become: yes
 
 - name: Set hostname
@@ -41,6 +41,34 @@
     path: /opt/elasticsearch/config/elasticsearch.yml
     regexp: '^node\.name:'
     line: 'node.name: {{ hostname }}'
+  become: yes
+
+- name: Set SSL transport keystore file path
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.keystore_filepath:'
+    line: 'searchguard.ssl.transport.keystore_filepath: {{ hostname }}-keystore.jks'
+  become: yes
+
+- name: Set SSL http keystore file path
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.keystore_filepath:'
+    line: 'searchguard.ssl.http.keystore_filepath: {{ hostname }}-keystore.jks'
+  become: yes
+
+- name: Set SSL SSL transport keystore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.transport.truststore_password:'
+    line: 'searchguard.ssl.transport.truststore_password:: {{ ssl_transport_keystore_password }}'
+  become: yes
+
+- name: Set SSL http keystore password
+  ansible.builtin.lineinfile:
+    path: /opt/elasticsearch/config/elasticsearch.yml
+    regexp: '^searchguard.ssl.http.keystore_password:'
+    line: 'searchguard.ssl.http.keystore_password: {{ http_keystore_password }}'
   become: yes
 
 - name: Add node configurations based on the role

@@ -26,8 +26,9 @@
   - Update the hosts file inside inventory directory with your correspnding IP addresses.
 
 - ### Running the Playbook
-  -     ansible-playbook -i inventory/hosts.ini playbook.yml
+  -     ansible-playbook -i inventory/hosts.ini playbook.yml --ask-become-pass
   - Use -vvv  for verbose output to get more details about what Ansible is doing.
+
 
 ## Generating TLS Keys
 - Download and unzip the search-guard offline tool: https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
@@ -54,6 +55,25 @@
         -nhnv
         -h <IP>
         -p <9330>
+
+## Creating a service for Elasticsearch:
+- From the ansible controller copy the elasticsearch.environment and elasticsearch.service files into the /opt folder, and /etc/systemd/system/ folder of each machine respectively using the following commands:
+  -     scp elasticsearch.environment USERNAME@IP_ADDRESS:/opt
+  -     scp elasticsearch.service USERNAME@IP_ADDRESS:/etc/systemd/system/
+- Login to each machine and run the following commands:
+  -      echo "vm.max_map_count = 262144" > /etc/sysctl.d/99-elasticsearch.conf
+  -      sysctl -p /etc/sysctl.d/99-elasticsearch.conf
+  -      ln -s ../elasticsearch.service /etc/systemd/system/multi-user.target.wants/
+  -      systemctl daemon-reload
+  -      systemctl start elasticsearch
+
+## Creating a service for Siren:
+- From the ansible controller copy the siren.service files into the  /etc/systemd/system/ folder of each machine using the following commands:
+  -     scp siren.service USERNAME@IP_ADDRESS:/etc/systemd/system/
+- Login to each machine as the root user (su - ) and run the following commands:
+  -      ln -s ../siren.service /etc/systemd/system/multi-user.target.wants/
+  -      systemctl daemon-reload
+  -      systemctl start siren
 
 ## Notes:
 - Ensure that max_map_count is enough.
