@@ -1,0 +1,15 @@
+[Unit]
+Description=Siren Investigate
+After=network.target auditd.service
+[Service]
+WorkingDirectory=/opt/siren-investigate
+EnvironmentFile=-/opt/siren.environment
+ExecStart=/opt/siren-investigate/bin/investigate
+KillMode=process
+Restart=on-failure
+RestartPreventExitStatus=255
+Type=simple
+User=siren
+[Install]
+WantedBy=multi-user.target
+Alias=siren.service

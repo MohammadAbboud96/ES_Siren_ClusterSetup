@@ -16,10 +16,12 @@
     siren_zip_name: "siren-platform.zip"
     siren_folder_name: "siren-platform"
     cluster_name: "ElasticSiren-Cluster-With-Security"
-    master_nodes: "master-1","master-2","master-3"  # Comma-separated list of master nodes
-    seed_hosts: 192.168.XX.XXY, 192.168.XX.XYZ  # Comma-separated list of seed hosts
+    master_nodes: ["master-1","master-2","master-3"]  # Comma-separated list of master nodes
+    seed_hosts: ['192.168.XX.XXY', '192.168.XX.XYZ' ] # Comma-separated list of seed hosts
     companyLogosDir: "LOGO_IMAGES_DIRECTORY"
     CompanyName: "YOUR_COMPANY_NAME"
+    ssl_transport_keystore_password: "password"
+    http_keystore_password: "password"
 
   roles:
     - common

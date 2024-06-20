@@ -1,0 +1,17 @@
+[Unit]
+Description=Elasticsearch (Siren)
+After=network.target auditd.service
+[Service]
+WorkingDirectory=/opt/elasticsearch
+EnvironmentFile=-/opt/elasticsearch.environment
+ExecStart=/opt/elasticsearch/bin/elasticsearch
+KillMode=process
+Restart=on-failure
+RestartPreventExitStatus=255
+Type=simple
+User=elasticsearch
+LimitMEMLOCK=infinity
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
+Alias=elasticsearch.service

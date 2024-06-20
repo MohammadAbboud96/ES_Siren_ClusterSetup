@@ -37,7 +37,7 @@
   ansible.builtin.lineinfile:
     path: /home/siren/siren-investigate/config/investigate.yml
     regexp: '^server.ssl.certificate:'
-    line: "server.ssl.certificate:{{ hostname }}.pem"
+    line: "server.ssl.certificate: {{ hostname }}.pem"
   become: yes
 
 - name: Setting ssl key
