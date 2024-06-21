@@ -52,8 +52,9 @@
         -kspass <keystore_password> \
         -ts /path/to/truststore.jks \
         -tspass <truststore_password> \
-        -nhnv
-        -h <IP>
+        -icl \
+        -nhnv \
+        -h <IP> \
         -p <9330>
 
 ## Creating a service for Elasticsearch:
