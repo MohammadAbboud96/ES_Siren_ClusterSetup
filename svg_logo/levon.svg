@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 900 900" width="1280" height="1280" xmlns="http://www.w3.org/2000/svg">
+<path transform="translate(0)" d="m0 0h900v900h-900z" fill="#333838"/>
+<path transform="translate(312,391)" d="m0 0h12l12 2 12 5 9 7 7 7 8 15 3 11 1 8v14l-4 1h-79l6 9 6 5 10 3 13-1 8-4 6-5 6 1 19 10 3 2-2 4-7 8-8 7-13 6-10 2h-23l-11-3-10-5-11-9-7-10-5-11-2-8v-24l4-13 5-9 8-10 12-9 10-4z" fill="#CFD0D1"/>
+<path transform="translate(641,393)" d="m0 0h42l18 1 10 3 11 8 6 8 4 8 1 4 1 79-5 2h-26l-2-2-1-72-2-4-4-2-37-1v80l-3 1h-27l-2-1v-111z" fill="#CFD0D1"/>
+<path transform="translate(527,397)" d="m0 0 3 1 10 24 1 6-7 5-4 8-1 4v9l4 10 6 7 8 4 11 1 11-4 7-6 4-8 1-5v-7l-4-11-5-6-3-2 3-10 8-19h4l13 10 8 10 5 10 4 14v14l-3 13-7 14-7 9-12 9-11 5-9 2-11 1-15-2-12-5-9-6-6-5-8-11-5-11-3-13v-13l4-16 6-11 11-12z" fill="#CFD0D1"/>
+<path transform="translate(370,394)" d="m0 0h34l5 8 18 38 8 16v2l3-3 7-16 6-12 6-14 8-16 2-3h35l-2 6-13 27-12 26-17 36-8 16-2 1-24-1-5-8-9-19-8-16-20-41-12-25z" fill="#CFD0D1"/>
+<path transform="translate(168,393)" d="m0 0h28l2 1 1 68 2 8 6 4 6 1h42l2 5v24l-3 1h-53l-12-3-10-7-7-8-5-12-1-9v-64l1-8z" fill="#CFD0D1"/>
+<path transform="translate(313,420)" d="m0 0h11l10 4 6 6v3h-43l1-4 7-6z" fill="#333838"/>
+</svg>
