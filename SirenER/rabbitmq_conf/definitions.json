@@ -1,0 +1,124 @@
+{
+  "rabbit_version": "3.9.13",
+  "rabbitmq_version": "3.9.13",
+  "product_name": "RabbitMQ",
+  "product_version": "3.9.13",
+  "users": [
+    {
+      "name": "user",
+      "password_hash": "bSq9lLAAUddykc+LAkM2AbiyjJ9txDu9dIOm1mPtHgkBqUoO",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "user",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-kGXLdP7Ty55f3fujoWJ35g"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "senzing-rabbitmq-failure-queue",
+      "vhost": "/",
+      "durable": false,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "senzing-rabbitmq-info-queue",
+      "vhost": "/",
+      "durable": false,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "senzing-rabbitmq-redo-failure-queue",
+      "vhost": "/",
+      "durable": false,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "senzing-rabbitmq-queue",
+      "vhost": "/",
+      "durable": false,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "senzing-rabbitmq-redo-exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": false,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "senzing-rabbitmq-exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": false,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "senzing-rabbitmq-redo-exchange",
+      "vhost": "/",
+      "destination": "senzing-rabbitmq-redo-failure-queue",
+      "destination_type": "queue",
+      "routing_key": "senzing.failure.redo",
+      "arguments": {}
+    },
+    {
+      "source": "senzing-rabbitmq-exchange",
+      "vhost": "/",
+      "destination": "senzing-rabbitmq-failure-queue",
+      "destination_type": "queue",
+      "routing_key": "senzing.failure",
+      "arguments": {}
+    },
+    {
+      "source": "senzing-rabbitmq-exchange",
+      "vhost": "/",
+      "destination": "senzing-rabbitmq-info-queue",
+      "destination_type": "queue",
+      "routing_key": "senzing.info",
+      "arguments": {}
+    },
+    {
+      "source": "senzing-rabbitmq-exchange",
+      "vhost": "/",
+      "destination": "senzing-rabbitmq-queue",
+      "destination_type": "queue",
+      "routing_key": "senzing.records",
+      "arguments": {}
+    }
+  ]
+}
