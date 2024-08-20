@@ -1,0 +1,28 @@
+{
+  "processors": [
+    {
+      "script": {
+        "source": "def data = ['DATA_SOURCE' : 'TEST']; for ( def field : ctx.keySet() ) {\n      if((String)field.charAt(0) != '_') {\n          data[field] = ctx[field]\n      }\n}\ndata.RECORD_ID = 'customer'+'|'+'person'+'|'+ctx.RECORD_ID;\nctx.data = data;"
+      }
+    },
+    {
+      "json-ws": {
+        "resource_name": "senzing",
+        "method": "post",
+        "url": "http://localhost:8080",
+        "input_map": {
+          "$.data": "data"
+        },
+        "output_map": {
+          "logstash_response": "$"
+        },
+        "error_output_field": "json-ws-error"
+      }
+    },
+    {
+     "remove": {
+        "field": "data"
+      }
+    }
+  ]
+}
