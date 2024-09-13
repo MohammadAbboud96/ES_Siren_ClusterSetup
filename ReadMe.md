@@ -23,7 +23,7 @@
         - ssh your_username@server3
 
 - ### Update Ansible Inventory 
-  - Update the hosts file inside inventory directory with your correspnding IP addresses.
+  - Update the hosts file inside inventory directory with your corresponding IP addresses.
 
 - ### Running the Playbook
   -     ansible-playbook -i inventory/hosts.ini playbook.yml --ask-become-pass

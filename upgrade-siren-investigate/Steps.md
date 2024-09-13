@@ -1,0 +1,27 @@
+## Upgrading Siren-investigate
+
+- ### Create a folder to save copy of important files inside it
+  -     mkdir -p /home/siren/backups/{config,pki,assets,DIR}
+- ### Copy the files from siren-investigate to the created folders 
+  -     cd /opt/siren-investigate
+  -     cp -r config/* /home/siren/backups/config
+  -     cp -r pki/* /home/siren/backups/pki
+  -     cp -r assets/* /home/siren/backups/assets
+- ### Create back-up of the saved objects index or mappings
+  -     bin/investigate backup --backup-dir=DIR
+- ### Stop the siren service and rename siren-investigate folder
+  -     sudo systemctl stop siren.service
+  -     sudo mv siren-investigate siren-investigate-{{Version}}
+- ### Download and Extract Siren-investigate
+  -     wget -O siren-investigate-new.zip https://download.siren.io/platform/download/?component=siren-investigate&os=linux&version=14.3.2
+  -     unzip siren-investigate-new.zip -d /opt/
+  -     cd /opt/
+  -     mv siren-investigate-14.3.2-linux-x86_64/ siren-investigate
+- ### Copy the backups back to siren-investigate
+  -     cd /opt/
+  -     cp -r /home/siren/backups/* siren-investigate
+- ### Upgrade Siren-investigate
+  -     cd /opt/siren-investigate
+  -     bin/investigate upgrade
+- ### Restart Siren service
+  -     sudo systemctl restart siren.service
