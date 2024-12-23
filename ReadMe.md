@@ -83,3 +83,20 @@
   - Add [vm.max_map_count=262144]
   -     sudo sysctl -p
 
+- To backup siren investigate:
+  - Copy the siren_backup.sh file
+  - Create a backup directory and logs directory:
+    -     sudo mkdir siren-backup-dir
+    -     sudo mkdir log-siren-backup 
+  - Ensure backup scrip executable
+    -     chmod +x /path/to/siren_backup.sh
+    -     ./path/to/siren_backup.sh
+  - To restore the indices:
+    -     bin/investigate backup --backup-dir=/path/to/siren-backup-dir
+- To automate the process schedule the backup using cron job:
+  - Open the crontab editor:
+    -     crontab -e
+  - Add this line to run it every Sunday at midnight
+    -     0 0 * * 0 /path/to/siren_backup.sh
+
+
