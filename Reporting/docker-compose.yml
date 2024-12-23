@@ -1,0 +1,8 @@
+services:
+  jsreport:
+    image: jsreport/jsreport:latest
+    ports:
+    - "5488:5488"
+    volumes:
+    - "./data:/app/data"
+    - "./jsreport.config.json:/app/jsreport.config.json"
