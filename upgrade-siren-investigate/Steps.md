@@ -1,4 +1,14 @@
 ## Upgrading Siren-investigate
+- ### Create close_pit role and assign it to siren server
+  -     cluster_permissions:
+          - 'indices:data/read/close_point_in_time'   
+        index_permissions:
+          - index_patterns:
+            - '*'
+           fls: []
+           masked_fields: []
+           allowed_actions:
+            - 'indices:data/read/close_point_in_time'
 
 - ### Create a folder to save copy of important files inside it
   -     mkdir -p /home/siren/backups/{config,pki,assets,DIR}
@@ -13,10 +23,10 @@
   -     sudo systemctl stop siren.service
   -     sudo mv siren-investigate siren-investigate-{{Version}}
 - ### Download and Extract Siren-investigate
-  -     wget -O siren-investigate-new.zip https://download.siren.io/platform/download/?component=siren-investigate&os=linux&version=14.3.2
+  -     wget -O siren-investigate-new.zip https://download.siren.io/platform/download/?component=siren-investigate&os=linux&version=15.0.1
   -     unzip siren-investigate-new.zip -d /opt/
   -     cd /opt/
-  -     mv siren-investigate-14.3.2-linux-x86_64/ siren-investigate
+  -     mv siren-investigate-15.0.1-linux-x86_64/ siren-investigate
 - ### Copy the backups back to siren-investigate
   -     cd /opt/
   -     cp -r /home/siren/backups/* siren-investigate
